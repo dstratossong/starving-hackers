@@ -1,5 +1,15 @@
 body {
-	font-family: 'Roboto Condensed', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+	font-family: 'Roboto Condensed', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-color: #242424;
+	color: #FFFFFF;
+}
+
+.btn {
+	background: #FF476A;
+}
+
+a, i {
+	color:  #FF476A !important;
 }
 
 #output {

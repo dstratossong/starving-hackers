@@ -61,16 +61,21 @@ function($rootScope, $scope, $http, $localStorage, $timeout, $interval) {
 		}
 
 		client.onPartialResponseReceived = function(response) {
-			setText(JSON.stringify(response));
-			console.log(JSON.stringify(response));
+			setText(response[0].lexical);
+			$scope.reqData = response;
+			console.log($scope.reqData);
 		}
 
 		client.onFinalResponseReceived = function(response) {
-			setText(JSON.stringify(response));
+			setText(response[0].lexical);
+			$scope.reqData = response;
+			console.log($scope.reqData);
 		}
 
 		client.onIntentReceived = function(response) {
-			setText(JSON.stringify(response));
+			setText(response[0].lexical);
+			$scope.reqData = response;
+			console.log($scope.reqData);
 		};
 	};
 }]);
