@@ -4,14 +4,13 @@
 		Jam As A Service
 	</p>
 	<div class="text-center center-block" id="mic">
-		<a href="" ng-click="start();cgColor = !cgColor"> <i  class="fa fa-microphone fa-3x"
-		ng-class="{'text-primary' : !cgColor, 'text-danger': cgColor}"> </i> </a>
+		<a href="" ng-click="start();"> <i  class="fa fa-microphone fa-5x"
+		ng-class="{'text-primary' : !options.showText, 'text-danger': options.showText}"> </i> </a>
 	</div>
 
 </div>
 
-<div class="center-block col-xs-12">
-	<br />
+<div class="center-block col-xs-12" ng-show="options.showText" style="padding-top: 200px;">
 	<form class="form-group">
 		<textarea id="output" class="form-control center-block" style="width: 70%"> </textarea>
 	</form>

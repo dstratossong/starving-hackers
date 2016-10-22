@@ -10,17 +10,9 @@ function($rootScope, $scope, $http, $localStorage, $timeout, $interval) {
 		guestsList : $scope.guests
 	});
 
-	$scope.hide_logo = false;
-
-	// function to set the default data
-	$scope.reset = function() {
-
-		$scope.hey = "Hey" + (numb++);
-	};
-	var numb = 0;
-	$scope.hey = "___";
-
-	$scope.$storage.x = '';
+	$scope.hide_logo = false; 
+	
+	$scope.options = {};
 
 	$scope.start = function() {
 		var mode = getMode();
@@ -38,7 +30,7 @@ function($rootScope, $scope, $http, $localStorage, $timeout, $interval) {
 			}
 			client.startMicAndRecognition();
 			setTimeout(function() {
-				$scope.cgColor = !$scope.cgColor;
+				$scope.options.showText = true;
 				client.endMicAndRecognition();
 			}, listenDur);
 		} else {
@@ -80,3 +72,5 @@ function($rootScope, $scope, $http, $localStorage, $timeout, $interval) {
 		};
 	};
 }]);
+
+// Replace with Syn: http://thesaurus.altervista.org/thesaurus/v1?word=peace&language=en_US&output=json&key=IjKnZVwcqOdJYHfzW3D7&callback=process
