@@ -48,7 +48,7 @@ function($rootScope, $scope, $http, $localStorage, $timeout, $interval) {
 				client = Microsoft.CognitiveServices.SpeechRecognition.SpeechRecognitionServiceFactory.createDataClient(mode, getLanguage(), getKey());
 			}
 			request = new XMLHttpRequest();
-			request.open('GET', (mode == Microsoft.CognitiveServices.SpeechRecognition.SpeechRecognitionMode.shortPhrase) ? "sounds/donald_cut.wav" : "batman.wav", true);
+			request.open('GET', (mode == Microsoft.CognitiveServices.SpeechRecognition.SpeechRecognitionMode.shortPhrase) ? "sounds/amy.wav" : "batman.wav", true);
 			request.responseType = 'arraybuffer';
 			request.onload = function() {
 				if (request.status !== 200) {
