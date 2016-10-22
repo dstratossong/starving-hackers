@@ -1,33 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  ng-app="myApp">
 	<head>
-		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-		<script src="speech.1.0.0.js" type="text/javascript"></script>
-		<script src="js/script.js" type="text/javascript"></script>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+		<script src="https://code.angularjs.org/1.5.8/angular-route.min.js"></script>
+		
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<link href='https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed' rel='stylesheet' type='text/css'>
 		<link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 		<link href='css/style.css' rel='stylesheet' type='text/css'>
 
+		<script src="js/app.js"></script>
+		<script src="js/controllers.js"></script>
+		<script src="js/speech.1.0.0.js" type="text/javascript"></script>
+		<script src="js/script.js" type="text/javascript"></script>
+
 	</head>
-	<body class="container-fluid">
-		<div class="row">
-
-			<div class="col-xs-12 text-center">
-				<h1>JAMAAS</h1><p> Jam Me As A Service</p></td>
-				<div class="text-center center-block">
-					<a href="" onclick="start()"> <i  class="fa fa-microphone fa-3x"> </i> </a>
-				</div>
-
-			</div>
-
-			<div class="center-block col-xs-12">
-				<br />
-				<textarea id="output" class="text-center center-block" style="width: 70%">
-					 
-				</textarea>
-			</div>
-		</div>
+	<body class="container-fluid" >
+		<div class="row" autoscroll="true" ng-view></div>
 		<!-- <table width="100%">
 		<tr></tr>
 		<tr>
@@ -66,9 +58,8 @@
 		</tr>
 		</table> -->
 	</body>
-	<script
-	src="https://code.jquery.com/jquery-3.1.0.min.js"
-	integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
-	crossorigin="anonymous"></script>
+	<script src="js/ngStorage.js"></script>
+	<script src="https://code.angularjs.org/1.5.0-rc.0/angular-sanitize.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </html>

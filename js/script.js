@@ -2,7 +2,7 @@ var client;
 var request;
 
 function useMic() {
-	return document.getElementById("useMic").checked;
+	return true;
 }
 
 function getMode() {
@@ -10,7 +10,7 @@ function getMode() {
 }
 
 function getKey() {
-	return document.getElementById("key").value;
+	return '6c924158d275486ea18d4d3e7038fdd0';
 }
 
 function getLanguage() {
@@ -26,8 +26,8 @@ function setText(text) {
 }
 
 function getLuisConfig() {
-	var appid = document.getElementById("luis_appid").value;
-	var subid = document.getElementById("luis_subid").value;
+	var appid = '';
+	var subid = '';
 
 	if (appid.length > 0 && subid.length > 0) {
 		return {
@@ -39,15 +39,13 @@ function getLuisConfig() {
 	return null;
 }
 
-var mic = document.getElementsByClassName('fa-microphone');
-
 function start() {
 	var mode = getMode();
 	var luisCfg = getLuisConfig();
+	
+	var listenDur = 2000;
 
 	clearText();
-	
-	mic
 
 	if (useMic()) {
 		if (luisCfg) {
@@ -60,7 +58,7 @@ function start() {
 		client.startMicAndRecognition();
 		setTimeout(function() {
 			client.endMicAndRecognition();
-		}, 2000);
+		}, listenDur);
 	} else {
 		if (luisCfg) {
 			client = Microsoft.CognitiveServices.SpeechRecognition.SpeechRecognitionServiceFactory.createDataClientWithIntent(getLanguage(), getKey(), luisCfg.appid, luisCfg.subid);
@@ -83,6 +81,7 @@ function start() {
 
 	client.onPartialResponseReceived = function(response) {
 		setText(JSON.stringify(response));
+		console.log(JSON.stringify(response));
 	}
 
 	client.onFinalResponseReceived = function(response) {
