@@ -17,11 +17,6 @@ function getLanguage() {
 	return "en-us";
 }
 
-function clearText() {
-	document.getElementById("output").value = "";
-	document.getElementbyId("sentiment").value = "";
-}
-
 function setText(text) {
 	document.getElementById("output").value += text;
 }

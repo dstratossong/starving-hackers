@@ -28,8 +28,6 @@ function($rootScope, $scope, $http, $localStorage, $timeout, $interval) {
 
 		var listenDur = 2000;
 
-		clearText();
-
 		if (useMic()) {
 			if (luisCfg) {
 				client = Microsoft.CognitiveServices.SpeechRecognition.SpeechRecognitionServiceFactory.createMicrophoneClientWithIntent(getLanguage(), getKey(), luisCfg.appid, luisCfg.subid);
