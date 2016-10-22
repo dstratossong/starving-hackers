@@ -13,19 +13,16 @@ oscillator.connect(gainNode);
 gainNode.connect(audioCtx.destination);
 oscillator.type = 'triangle'; // sine wave — other values are 'square', 'sawtooth', 'triangle' and 'custom'
 oscillator.frequency.value = cMajor[0]; // value in hertz
-oscillator.start();
+// oscillator.start();
+var is_start = false;
 
 this.i=0;
 var changeFreq = function(major){
     var pause = Math.random();
-    if(pause<=0.9){
-        oscillator.disconnect();
-    }
-    else{
-    if(this.i==0||this.i==2||this.i==4||this.i==7||this.i==6){
+    if(this.i === 0||this.i==2||this.i==4||this.i==7||this.i==6){
         var cur = this.i;
         var switchToMinor = Math.floor(Math.random()*3);
-        if(switchToMinor==0&& i !=7){
+        if(switchToMinor === 0 && i !=7){
             this.i +=1;
         }
         else{
@@ -51,7 +48,7 @@ var changeFreq = function(major){
     // }
     else{
         var up = Math.floor(Math.random()*4);
-        if(up==0){
+        if(up === 0){
             this.i--;
         }
         else if(up==1){
@@ -70,15 +67,19 @@ var changeFreq = function(major){
             }
         }
     }
-}
+
     console.log(this.i);
-    
-    oscillator.connect(gainNode);
+
     oscillator.frequency.value = major[this.i];
 };
-(function loop() {
-    isHappy=true;
+
+function loop(sentiment) {
+    isHappy = sentiment > 0.5;
     var noteLength = 0;
+    if(!is_start){
+        oscillator.start();
+        is_start = true;
+    }
     if(isHappy){
         var r = Math.floor(Math.random()*5);
             console.log("happy "+ r);
@@ -88,8 +89,8 @@ var changeFreq = function(major){
                 r= Math.floor(Math.random()*4);
                 noteLength=noteHappyLength[r];
         }
-        if(r==0){
-            noteLength = noteHappyLength[Math.floor(Math.random()*2+1)]
+        if(r === 0){
+            noteLength = noteHappyLength[Math.floor(Math.random()*2+1)];
         }
     }
     else{
@@ -101,21 +102,21 @@ var changeFreq = function(major){
                 r= Math.floor(Math.random()*4);
                 noteLength=noteSadLength[r];
         }
-        if(r==0){
-            noteLength = noteSadLength[Math.floor(Math.random()*2+1)]
+        if(r === 0){
+            noteLength = noteSadLength[Math.floor(Math.random()*2+1)];
         }
     }
-    console.log(noteLength + "sss")
+    console.log(noteLength + "sss");
     setTimeout(function() {
         if(this.i<cMajor.length&&isHappy){
-            changeFreq(cMajor);  
+            changeFreq(cMajor);
         }
         else{
             changeFreq(cMinor);
         }
-        loop();  
+        loop(sentiment);
     },noteLength);
-}());
+}
 
 
 
