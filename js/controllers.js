@@ -26,7 +26,7 @@ function($rootScope, $scope, $http, $localStorage, $timeout, $interval) {
 		var mode = getMode();
 		var luisCfg = getLuisConfig();
 
-		var listenDur = 2000;
+		var listenDur = 5000;
 
 		if (useMic()) {
 			if (luisCfg) {

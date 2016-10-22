@@ -2,7 +2,7 @@ var client;
 var request;
 
 function useMic() {
-	return false;
+	return true;
 }
 
 function getMode() {
