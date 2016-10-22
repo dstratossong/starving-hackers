@@ -39,11 +39,15 @@ function getLuisConfig() {
 	return null;
 }
 
+var mic = document.getElementsByClassName('fa-microphone');
+
 function start() {
 	var mode = getMode();
 	var luisCfg = getLuisConfig();
 
 	clearText();
+	
+	mic
 
 	if (useMic()) {
 		if (luisCfg) {
