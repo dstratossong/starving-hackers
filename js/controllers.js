@@ -63,11 +63,12 @@ function($rootScope, $scope, $http, $localStorage, $timeout, $interval) {
 		client.onPartialResponseReceived = function(response) {
 			setText(JSON.stringify(response));
 			console.log(JSON.stringify(response));
-		}
+		};
 
 		client.onFinalResponseReceived = function(response) {
-			setText(JSON.stringify(response));
-		}
+			setText(response[0].lexical);
+			getSentiment();
+		};
 
 		client.onIntentReceived = function(response) {
 			setText(JSON.stringify(response));

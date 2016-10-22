@@ -65,11 +65,11 @@ function getSentiment() {
 		if (request.status !== 200) {
 			console.log("failed to get sentiment`");
 		} else {
-			// on success, update the content of the div just to confirm
+			// on success, run the music loop
 			var response = request.response;
-			console.log(response);
 			var sentiment = response.documents[0].score;
 			console.log(sentiment);
+			loop(sentiment);
 		}
 	};
 
