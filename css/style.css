@@ -8,12 +8,30 @@ body {
 	background: #FF476A;
 }
 
-a, i {
-	color:  #FF476A !important;
-}
-
 #output {
 	height:300px;
 	background-color: #2B2B2B;
 	color: #FFFFFF;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+audio, a {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+#mic {
+  color: white;
+  transition: all 0.5s ease;
+}
+
+#mic.active {
+  color: red !important;
 }
