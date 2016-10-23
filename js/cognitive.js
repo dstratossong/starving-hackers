@@ -44,8 +44,8 @@ function sendRequest() {
 
 	client.onFinalResponseReceived = function(response) {
 		setText(JSON.stringify(response));
-		getSentiment(response[0].lexical);
 		gottenStr = response[0].lexical;
+		getSentiment(gottenStr);
 		gottenStr = gottenStr.split(" ");
 		getFirstStrings();
 		

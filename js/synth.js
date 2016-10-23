@@ -13,114 +13,117 @@ gainNode.connect(audioCtx.destination);
 var oscillator = audioCtx.createOscillator();
 var audio;
 var source;
-function start(sounds){
-if(sounds!=null){
-    var play = document.querySelector("audio");
-    play.play();
-    play.loop=true;
 
-    this.i=0;
-var changeFreq = function(major){
-    if(this.i==0||this.i==2||this.i==4||this.i==7||this.i==6){
-        var cur = this.i;
-        var switchToMinor = Math.floor(Math.random()*3);
-        if(switchToMinor==0&& i !=7){
-            this.i +=1;
-        }
-        else{
-            var arr = [0,2,4,7];
-         this.i = arr[Math.floor(Math.random()*4)];
+function start(sounds, sentiment) {
+    if (sounds !== null) {
+        var play = document.querySelector("audio");
+        play.play();
+        play.loop = true;
 
-         while(this.i==cur||Math.abs(cur-this.i)>=6){
-             this.i =arr[Math.floor(Math.random()*4)];
-         }
-     }
-    }
-    else{
-        console.log("fd4ds"+this.i)
-        var up = Math.floor(Math.random()*4);
-        if(up==0){
-            this.i--;
-            console.log("f3dds"+this.i)
-        }
-        else if(up==1){
-            this.i++;
-            console.log("f22dds"+this.i)
-        }
-        else if(up==2){
-            this.i+=3;
-            if(this.i>=cMajor.length){
-                this.i=7;
+        this.i = 0;
+
+        var isHappy = sentiment > 0.5;
+
+        var changeFreq = function(major) {
+            if (this.i === 0 || this.i == 2 || this.i == 4 || this.i == 7 || this.i == 6) {
+                var cur = this.i;
+                var switchToMinor = Math.floor(Math.random()*3);
+                if (switchToMinor === 0 && i != 7) {
+                    this.i +=1;
+                } else {
+                    var arr = [0,2,4,7];
+                    this.i = arr[Math.floor(Math.random()*4)];
+
+                     while (this.i == cur || Math.abs(cur - this.i) >= 6) {
+                         this.i = arr[Math.floor(Math.random()*4)];
+                     }
+                }
+            } else {
+                console.log("fd4ds"+this.i);
+                var up = Math.floor(Math.random()*4);
+                if (up === 0) {
+                    this.i--;
+                    console.log("f3dds"+this.i);
+
+                } else if(up == 1) {
+                    this.i++;
+                    console.log("f22dds"+this.i);
+
+                } else if (up == 2) {
+                    this.i += 3;
+                    if(this.i>=cMajor.length) {
+                        this.i=7;
+                    }
+                    console.log("ff11dds"+this.i);
+                } else {
+                    this.i-=3;
+                    if (this.i < 0) {
+                        this.i = 0;
+                    }
+                    console.log("fdds"+this.i);
+                }
+                console.log("fdds"+this.i);
             }
-            console.log("ff11dds"+this.i)
-        }
-        else{
-            this.i-=3;
-            if(this.i<0){
-                this.i=0;
+            console.log("f"+this.i);
+            oscillator.frequency.value = major[this.i];
+            if (isHappy) {
+                play.playbackRate=audioCents[this.i];
+            } else {
+                play.playbackRate=audioCentsSad[this.i];
             }
-            console.log("fdds"+this.i)
-        }
-        console.log("fdds"+this.i)
+        };
+
+
+        oscillator.connect(gainNode);
+        oscillator.type = 'triangle'; // sine wave — other values are 'square', 'sawtooth', 'triangle' and 'custom'
+        oscillator.frequency.value = cMajor[0]; // value in hertz
+        oscillator.start();
+
+
+        (function loop() {
+            var noteLength = 0;
+            if (isHappy) {
+                var r = Math.floor(Math.random()*5);
+                console.log("happy "+ r);
+                noteLength = noteHappyLength[r];
+
+                if ((this.i % 2 == 1 || this.i == 6) && r == 4 && i != 7) {
+                    console.log("minor "+ i);
+                    r = Math.floor(Math.random()*4);
+                    noteLength=noteHappyLength[r];
+                }
+
+                if(r === 0) {
+                    noteLength = noteHappyLength[Math.floor(Math.random()*2+1)];
+                }
+            } else {
+                var r = Math.floor(Math.random()*5);
+                console.log("happy "+ r);
+                noteLength = noteSadLength[r];
+
+                if ((this.i % 2 == 1 || this.i == 6) && r == 4 && i != 7) {
+                    console.log("minor "+ i);
+                    r = Math.floor(Math.random()*4);
+                    noteLength=noteSadLength[r];
+                }
+
+                if (r === 0) {
+                    noteLength = noteSadLength[Math.floor(Math.random()*2+1)];
+                }
+            }
+
+            console.log(noteLength + "sss");
+
+            setTimeout(function() {
+                if (this.i < cMajor.length && isHappy) {
+                    changeFreq(cMajor);
+                } else {
+                    changeFreq(cMinor);
+                }
+
+                loop();
+
+            }, noteLength);
+        }());
     }
-    console.log("f"+this.i);
-    oscillator.frequency.value = major[this.i];  
-    if(happy){
-    play.playbackRate=audioCents[this.i];
 }
-else{
-    play.playbackRate=audioCentsSad[this.i];
-}
-};
-
-
-oscillator.connect(gainNode);
- oscillator.type = 'triangle'; // sine wave — other values are 'square', 'sawtooth', 'triangle' and 'custom'
-oscillator.frequency.value = cMajor[0]; // value in hertz
- oscillator.start();
-
- 
- (function loop() {
-    isHappy=true;
-    var noteLength = 0;
-    if(happy){
-        var r = Math.floor(Math.random()*5);
-            console.log("happy "+ r);
-            noteLength = noteHappyLength[r];
-        if((this.i%2==1 ||this.i==6)&&r==4&&i!=7){
-                console.log("minor "+ i);
-                r= Math.floor(Math.random()*4);
-                noteLength=noteHappyLength[r];
-        }
-        if(r==0){
-            noteLength = noteHappyLength[Math.floor(Math.random()*2+1)]
-        }
-    }
-    else{
-        var r = Math.floor(Math.random()*5);
-            console.log("happy "+ r);
-            noteLength = noteSadLength[r];
-        if((this.i%2==1 ||this.i==6)&&r==4&&i!=7){
-                console.log("minor "+ i);
-                r= Math.floor(Math.random()*4);
-                noteLength=noteSadLength[r];
-        }
-        if(r==0){
-            noteLength = noteSadLength[Math.floor(Math.random()*2+1)]
-        }
-       
-    } 
-    console.log(noteLength + "sss")
-    setTimeout(function() {
-        if(this.i<cMajor.length&&isHappy){
-            changeFreq(cMajor);  
-        }
-        else{
-            changeFreq(cMinor);
-        }
-        loop();
-
-    },noteLength);
-}());
-
-}}
