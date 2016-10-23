@@ -12,6 +12,7 @@ let log = console.log.bind(console),
     stream,
     blob,
     url,
+    item,
     media = {
       tag: 'audio',
       type: 'audio/ogg',
@@ -53,7 +54,7 @@ function toggleRecord() {
     chunks = [];
     recorder.start();
     recording = true;
-    mic.className = 'active';
+    mic.className = 'animateBtn';
     toggle.disabled = false;
   }
 }
@@ -72,7 +73,8 @@ function makeLink() {
   player.controls = true;
   player.src = url;
   link.href = url;
-  link.download = `sound${counter++}${media.ext}`;
+  // link.download = `sound${counter++}${media.ext}`;
+  link.download = "Download";
   link.innerHTML = `${link.download}`;
   div.appendChild(player);
   div.appendChild(br);
@@ -83,6 +85,9 @@ function makeLink() {
 function handleAudio() {
   processAudio();
   makeLink();
+	console.log(url.replace("blob:", ""));
+	console.log(blob);
+  sendRequest();
   // do other things here!
   //   -- chunks are the buffered audio binaries
   //   -- blob is the combined audio binary

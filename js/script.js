@@ -17,13 +17,17 @@ function getLanguage() {
 	return "en-us";
 }
 
+function clearText() {
+	document.getElementById("output").value = "";
+}
+
 function setText(text) {
 	document.getElementById("output").value += text;
 }
 
 function getLuisConfig() {
-	var appid = '';
-	var subid = '';
+	var appid = "";
+	var subid = "";
 
 	if (appid.length > 0 && subid.length > 0) {
 		return {
@@ -49,13 +53,11 @@ function getSentiment(input) {
 
 	// set body
 	request_json = {
-		"documents": [
-			{
-				"language": "en",
-				"id": "1",
-				"text": input
-			}
-		]
+		"documents" : [{
+			"language" : "en",
+			"id" : "1",
+			"text" : input
+		}]
 	};
 
 	request_body = JSON.stringify(request_json);
