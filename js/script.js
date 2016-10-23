@@ -35,8 +35,8 @@ function getLuisConfig() {
 	return null;
 }
 
-function getSentiment() {
-	var text = document.getElementById("output").value.trim();
+function getSentiment(input) {
+	// var text = document.getElementById("output").value.trim();
 	var request_url = 'https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment';
 
 	// open a new request object
@@ -53,7 +53,7 @@ function getSentiment() {
 			{
 				"language": "en",
 				"id": "1",
-				"text": text
+				"text": input
 			}
 		]
 	};
@@ -64,12 +64,13 @@ function getSentiment() {
 	request.onload = function() {
 		if (request.status !== 200) {
 			console.log("failed to get sentiment`");
+			return null;
 		} else {
 			// on success, run the music loop
 			var response = request.response;
 			var sentiment = response.documents[0].score;
 			console.log(sentiment);
-			loop(sentiment);
+			return sentiment;
 		}
 	};
 
