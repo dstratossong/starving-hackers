@@ -73,7 +73,7 @@ function makeLink() {
   player.src = url;
   link.href = url;
   link.download = `sound${counter++}${media.ext}`;
-  link.innerHTML = `download ${link.download}`;
+  link.innerHTML = `${link.download}`;
   div.appendChild(player);
   div.appendChild(br);
   div.appendChild(link);

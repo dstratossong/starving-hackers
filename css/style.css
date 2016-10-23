@@ -21,12 +21,12 @@ body {
   display: block;
 }
 
-audio, a {
+/*audio, a {
   display: block;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-}
+}*/
 
 #mic {
   color: #FF476A;
@@ -38,3 +38,11 @@ audio, a {
   color: red !important;
 }
 
+#previewRow {
+	bottom: 20px !important;
+	position: fixed;
+}
+
+#downloadLink a {
+	text-align: right !important;
+}
