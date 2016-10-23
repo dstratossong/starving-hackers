@@ -1,7 +1,8 @@
 body {
-	font-family: 'Roboto Condensed', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	background-color: #242424;
 	color: #FFFFFF;
+	font-size: 20px;
 }
 
 .btn {
@@ -9,29 +10,95 @@ body {
 }
 
 #output {
-	height:300px;
+	height: 300px;
 	background-color: #2B2B2B;
 	color: #FFFFFF;
 }
 
 .center {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-}
-
-audio, a {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
 }
 
 #mic {
-  color: #FF476A;
-  transition: all 0.5s ease;
+	color: #FF476A;
+	transition: all 0.5s ease;
+	cursor: pointer !important;
+}
+#mic:hover {
+	color: #FF076e;
+	transition: all 0.5s ease;
+	cursor: pointer !important;
 }
 
 #mic.active {
-  color: red !important;
+	color: #FFFFFF !important;
+}
+
+#previewRow {
+	bottom: 20px !important;
+	position: fixed;
+}
+
+#downloadLink a {
+	text-align: right !important;
+}
+
+#title {
+	font-weight: 900;
+	font-variant: small-caps;
+}
+
+h1 {
+	transition: all 0.5s ease;
+	font-size: 100px;
+	font-weight: bold;
+	letter-spacing: -15px;
+	line-height: 1;
+}
+
+h1:hover {
+	letter-spacing: 0px;
+}
+
+h2 {
+	font-size: 30px;
+	font-weight: 300;
+	line-height: 32px;
+	margin: 0 0 72px;
+}
+
+p {
+	line-height: 24px;
+	margin: 0 0 24px;
+	text-justify: inter-word;
+}
+
+.right-slogan {
+	bottom: 0px !important;
+	position: fixed;
+	right: 20px !important;
+	font-style: italic;
+	font-size: 15px;
+}
+
+.animateBtn {
+	color: gold;
+	-webkit-animation-name: btnAnimation;
+	-webkit-animation-duration: 3s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease;
+	-webkit-animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes btnAnimation {
+from {
+	-webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(100px);
+	color: #FFFFFF;
+}
+to {
+	-webkit-transform: rotate(0deg) scale(2) skew(0deg) translate(100px);
+	color: #FF076e;
+}
 }
