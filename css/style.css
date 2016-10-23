@@ -2,6 +2,7 @@ body {
 	font-family: 'Roboto Condensed', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	background-color: #242424;
 	color: #FFFFFF;
+	font-size: 20px;
 }
 
 .btn {
@@ -30,8 +31,10 @@ audio, a {
 #mic {
   color: #FF476A;
   transition: all 0.5s ease;
+  cursor: pointer !important;
 }
 
 #mic.active {
   color: red !important;
 }
+
