@@ -8,6 +8,7 @@ this.noteHappyLength = [250,250,250,500,750];
 this.noteSadLength = [375,375,750,1125,1500];
 gainNode.gain.value=2.0;
 this.audioCents = [0.9,0.1,1.1,1.05,1.15,1.25,1.35,1.4];
+this.audioCentsSad = [0.6,0.7,0.8,0.85,0.95,1.05,1.15,1.2];
 gainNode.connect(audioCtx.destination);
 var oscillator = audioCtx.createOscillator();
 var audio;
@@ -16,6 +17,7 @@ function start(sounds){
 if(sounds!=null){
     var play = document.querySelector("audio");
     play.play();
+    play.loop=true;
 
     this.i=0;
 var changeFreq = function(major){
@@ -63,7 +65,12 @@ var changeFreq = function(major){
     }
     console.log("f"+this.i);
     oscillator.frequency.value = major[this.i];  
+    if(happy){
     play.playbackRate=audioCents[this.i];
+}
+else{
+    play.playbackRate=audioCentsSad[this.i];
+}
 };
 
 
@@ -76,7 +83,7 @@ oscillator.frequency.value = cMajor[0]; // value in hertz
  (function loop() {
     isHappy=true;
     var noteLength = 0;
-    if(isHappy){
+    if(happy){
         var r = Math.floor(Math.random()*5);
             console.log("happy "+ r);
             noteLength = noteHappyLength[r];
