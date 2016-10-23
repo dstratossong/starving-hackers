@@ -10,6 +10,8 @@ let log = console.log.bind(console),
     counter = 1,
     chunks,
     stream,
+    blob,
+    url,
     media = {
       tag: 'audio',
       type: 'audio/ogg',
@@ -26,7 +28,7 @@ toggle.onclick = e => {
       recorder = new MediaRecorder(stream);
       recorder.ondataavailable = e => {
         chunks.push(e.data);
-        if (recorder.state == 'inactive') makeLink();
+        if (recorder.state == 'inactive') handleAudio();
       }
       log('Successfully gotten stream.');
       toggleRecord();
@@ -56,10 +58,13 @@ function toggleRecord() {
   }
 }
 
+function processAudio() {
+  blob = new Blob(chunks, {type: media.type });
+  url = URL.createObjectURL(blob);
+}
+
 function makeLink() {
-  let blob = new Blob(chunks, {type: media.type }),
-      url = URL.createObjectURL(blob),
-      div = document.createElement('div'),
+  let div = document.createElement('div'),
       br = document.createElement('br'),
       player = document.createElement(media.tag),
       link = document.createElement('a');
@@ -73,4 +78,16 @@ function makeLink() {
   div.appendChild(br);
   div.appendChild(link);
   playback.appendChild(div);
+}
+
+function handleAudio() {
+  processAudio();
+  makeLink();
+  // do other things here!
+  //   -- chunks are the buffered audio binaries
+  //   -- blob is the combined audio binary
+  //   -- url is the accessor to the audio file
+  //   -- stream and recorder are invalid here
+  //   -- media.type is the mime-type of the blob
+  //   -- media.ext is the extension of the file
 }
