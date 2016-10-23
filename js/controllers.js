@@ -67,7 +67,7 @@ function($rootScope, $scope, $http, $localStorage, $timeout, $interval) {
 
 		client.onFinalResponseReceived = function(response) {
 			setText(response[0].lexical);
-			getSentiment();
+			loop(getSentiment(response[0].lexical));
 		};
 
 		client.onIntentReceived = function(response) {
