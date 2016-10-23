@@ -1,16 +1,19 @@
 var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 var cMajor = [261.63,293.66,329.63,349.23,392,440,523.25,523.25];
 var cMinor = [130.81,146.83,155.56,174.61,196,207.65,233.08,261.63];
+var sadBass = [65.41,77.78,65.41,98];
+var happyBass = [65.41,82.41,65.41,98];
+this.noteHappyLength = [250,250,250,500,750];
+this.noteSadLength = [375,375,750,1125,1500];
 var cMajorInitial = cMajor[0];
 var gainNode = audioCtx.createGain();
 this.randomNoteLength = Math.floor(Math.random()*4);
-this.noteHappyLength = [250,250,250,500,750];
-this.noteSadLength = [375,375,750,1125,1500];
 gainNode.gain.value=2.0;
 this.audioCents = [0.9,0.1,1.1,1.05,1.15,1.25,1.35,1.4];
 this.audioCentsSad = [0.6,0.7,0.8,0.85,0.95,1.05,1.15,1.2];
 gainNode.connect(audioCtx.destination);
 var oscillator = audioCtx.createOscillator();
+var bass = audioCtx.createOscillator();
 var audio;
 var source;
 
@@ -20,10 +23,11 @@ function start(sounds, sentiment) {
         play.play();
         play.loop = true;
 
+
         this.i = 0;
 
         var isHappy = sentiment > 0.5;
-
+ 
         var changeFreq = function(major) {
             if (this.i === 0 || this.i == 2 || this.i == 4 || this.i == 7 || this.i == 6) {
                 var cur = this.i;
@@ -78,15 +82,17 @@ function start(sounds, sentiment) {
         oscillator.type = 'triangle'; // sine wave — other values are 'square', 'sawtooth', 'triangle' and 'custom'
         oscillator.frequency.value = cMajor[0]; // value in hertz
         oscillator.start();
-
-
+        bass.start();
+ var noteLength = 0;
+  var bassBeat = 0 ;
         (function loop() {
-            var noteLength = 0;
+           
+           
             if (isHappy) {
                 var r = Math.floor(Math.random()*5);
                 console.log("happy "+ r);
                 noteLength = noteHappyLength[r];
-
+                bassBeat = 500;
                 if ((this.i % 2 == 1 || this.i == 6) && r == 4 && i != 7) {
                     console.log("minor "+ i);
                     r = Math.floor(Math.random()*4);
@@ -97,33 +103,36 @@ function start(sounds, sentiment) {
                     noteLength = noteHappyLength[Math.floor(Math.random()*2+1)];
                 }
             } else {
+                basBeat=750;
                 var r = Math.floor(Math.random()*5);
-                console.log("happy "+ r);
+         
                 noteLength = noteSadLength[r];
 
-                if ((this.i % 2 == 1 || this.i == 6) && r == 4 && i != 7) {
+                if ((this.i % 2 == 1 || this.i == 6) && r == 4 && this.i != 7) {
                     console.log("minor "+ i);
                     r = Math.floor(Math.random()*4);
                     noteLength=noteSadLength[r];
                 }
 
-                if (r === 0) {
+                if (r == 0) {
                     noteLength = noteSadLength[Math.floor(Math.random()*2+1)];
                 }
+
             }
-
-            console.log(noteLength + "sss");
-
+            console.log("happyddd "+ noteLength);
             setTimeout(function() {
-                if (this.i < cMajor.length && isHappy) {
-                    changeFreq(cMajor);
+                if (isHappy) {
+                    console.log(noteLength + "sss");
+            
+                    playBass(happyBass)
                 } else {
                     changeFreq(cMinor);
-                }
-
+                
+                    console.log(noteLength + "s777ss");
+                }      
                 loop();
-
             }, noteLength);
+     
         }());
     }
 }
