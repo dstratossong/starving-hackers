@@ -81,7 +81,6 @@ oscillator.frequency.value = cMajor[0]; // value in hertz
 
  
  (function loop() {
-    isHappy=true;
     var noteLength = 0;
     if(happy){
         var r = Math.floor(Math.random()*5);
