@@ -83,6 +83,7 @@ function makeLink() {
 function handleAudio() {
   processAudio();
   makeLink();
+  azureRecognize(blob, ??);
   // do other things here!
   //   -- chunks are the buffered audio binaries
   //   -- blob is the combined audio binary
