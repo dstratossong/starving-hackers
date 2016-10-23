@@ -1,5 +1,7 @@
 'use strict';
 
+var sounds;
+
 let log = console.log.bind(console),
     id = val => document.getElementById(val),
     toggle = id('toggle'),
@@ -10,6 +12,7 @@ let log = console.log.bind(console),
     counter = 1,
     chunks,
     stream,
+    streamToPass,
     blob,
     url,
     media = {
@@ -71,9 +74,11 @@ function makeLink() {
 
   player.controls = true;
   player.src = url;
+  streamToPass=player
   link.href = url;
   link.download = `sound${counter++}${media.ext}`;
   link.innerHTML = `download ${link.download}`;
+  sounds = media.media;
   div.appendChild(player);
   div.appendChild(br);
   div.appendChild(link);
@@ -83,6 +88,8 @@ function makeLink() {
 function handleAudio() {
   processAudio();
   makeLink();
+  console.log(blob)
+  start(sounds);
   // do other things here!
   //   -- chunks are the buffered audio binaries
   //   -- blob is the combined audio binary
